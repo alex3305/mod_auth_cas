@@ -2704,8 +2704,9 @@ void cas_register_hooks(apr_pool_t *p)
 #else
 	ap_hook_check_user_id(cas_authenticate, NULL, NULL, APR_HOOK_MIDDLE);
 #endif
-ap_hook_auth_checker(cas_authorize, NULL, authzSucc, APR_HOOK_MIDDLE);
+
 	ap_register_input_filter("CAS", cas_in_filter, NULL, AP_FTYPE_RESOURCE);
+
 #if MODULE_MAGIC_NUMBER_MAJOR >= 20120211
 	ap_register_auth_provider(p, AUTHZ_PROVIDER_GROUP, "cas-attribute",
 		AUTHZ_PROVIDER_VERSION,
