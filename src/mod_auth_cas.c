@@ -2077,6 +2077,10 @@ int cas_authenticate(request_rec *r)
 
 				if(c->CASRootProxiedAs.is_initialized) {
 						newLocation = apr_psprintf(r->pool, "%s%s%s%s", apr_uri_unparse(r->pool, &c->CASRootProxiedAs, 0), r->uri, ((r->args != NULL) ? "?" : ""), ((r->args != NULL) ? r->args : ""));
+						if(c->CASDebug)
+						    ap_log_rerror(APLOG_MARK, APLOG_DEBUG, 0, r, "NewLocation: %s", newLocation);
+						
+						return OK;
 				} else {
 #ifdef APACHE2_0
 					if(printPort == TRUE)
